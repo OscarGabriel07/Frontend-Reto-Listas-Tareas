@@ -1,3 +1,6 @@
+/**
+ * Esta función carga todas las listas de tareas en la página principal
+ */
 const getAll = async () => {
     let res = await fetch("http://localhost:8080/listing");
     let data = await res.json();
@@ -10,6 +13,7 @@ const getAll = async () => {
             const containerListOfTasksHeader = document.createElement('div');
             containerListOfTasksHeader.className = "list-of-tasks-header";
             const labelList = document.createElement('label');
+            labelList.id = element.id;
             labelList.textContent = element.name;
             const inputDeleteList = document.createElement('input');
             inputDeleteList.type = "button";
@@ -42,7 +46,7 @@ const getAll = async () => {
             const thTask = document.createElement('th');
             thTask.textContent = "Tarea";
             const thCompletado = document.createElement('th');
-            thCompletado.textContent = "Completado";
+            thCompletado.textContent = "¿Completado?";
             const thAcciones = document.createElement('th');
             thAcciones.textContent = "Acciones";
             trHead.appendChild(thId);
@@ -99,9 +103,45 @@ const getAll = async () => {
 
         containerLists.appendChild(fragment);
 
-    } catch (err) {
+    } catch (error) {
 
     }
 }
 
+/**
+ * Esta función crea una nueva lista
+ */
+const createNewList = () => {
+    const buttonNewList = document.querySelector(".btn-create-list");
+    const inputNewList = document.querySelector(".input-new-list");
+
+    buttonNewList.addEventListener("click", async () => {
+        if (inputNewList.value !== "") {
+
+            try {
+                let options = {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json; charset=utf-8"
+                    },
+                    body: JSON.stringify({
+                        name: inputNewList.value
+                    })
+                }
+                let res = await fetch("http://localhost:8080/listing", options);
+                let json = await res.json();
+
+                location.reload();
+            } catch (error) {
+
+            }
+        } else {
+            alert("Por favor ingrese el nombre de la nueva lista que desea crear");
+        }
+    });
+
+
+};
+
 document.addEventListener("DOMContentLoaded", getAll);
+createNewList();
