@@ -13,9 +13,9 @@ const getAll = async () => {
             const containerListOfTasksHeader = document.createElement('div');
             containerListOfTasksHeader.className = "list-of-tasks-header";
             const labelList = document.createElement('label');
-            labelList.id = element.id;
             labelList.textContent = element.name;
             const inputDeleteList = document.createElement('input');
+            inputDeleteList.id = element.id;
             inputDeleteList.type = "button";
             inputDeleteList.className = "btn-delete-list";
             inputDeleteList.value = "Eliminar";
@@ -143,5 +143,38 @@ const createNewList = () => {
 
 };
 
+/**
+ * Esta función se crea para la delegación de eventos del DOM
+ */
+const eventsButtons = () => {
+
+    document.addEventListener("click", async e => {
+        
+        /**
+         * Función para el evento de eliminar una lista
+         */
+        if (e.target.className === "btn-delete-list") {
+            let isDelete = confirm(`¿Estás seguro de eliminar la lista?`);
+
+            if (isDelete) {
+                try {
+                    let options = {
+                        method: "DELETE",
+                        headers: {
+                            "Content-type": "application/json; charset=utf-8"
+                        }
+                    }
+                    let res = await fetch(`http://localhost:8080/listing/${e.target.id}`, options);
+                    location.reload();
+                    let json = await res.json();
+
+                } catch (error) {
+                }
+            }
+        }
+    })
+}
+
 document.addEventListener("DOMContentLoaded", getAll);
 createNewList();
+eventsButtons();
