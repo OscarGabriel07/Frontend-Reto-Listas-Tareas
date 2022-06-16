@@ -64,14 +64,17 @@ const getAll = async () => {
             for (let i = 0; i < element.tasks.length; i++) {
                 const trBody = document.createElement('tr');
                 const tdId = document.createElement('td');
+                tdId.id = element.tasks[i].id + "-td-id";
                 tdId.textContent = element.tasks[i].id;
                 const tdDescription = document.createElement('td');
+                tdDescription.id = element.tasks[i].id + "-td-description";
                 tdDescription.textContent = element.tasks[i].description;
                 const tdCompleted = document.createElement('td');
                 const inputCheckBox = document.createElement('input');
                 inputCheckBox.type = "checkbox";
                 inputCheckBox.className = "check-completed";
                 inputCheckBox.checked = element.tasks[i].completed;
+                inputCheckBox.dataset.idTask = element.tasks[i].id;
                 tdCompleted.appendChild(inputCheckBox);
                 const tdAcciones = document.createElement('td');
                 const buttonEdit = document.createElement('input');
@@ -82,6 +85,7 @@ const getAll = async () => {
                 buttonEdit.dataset.description = element.tasks[i].description;
                 buttonEdit.dataset.id = element.tasks[i].id;
                 buttonEdit.dataset.completed = element.tasks[i].completed;
+                buttonEdit.id = element.tasks[i].id + "-td-button-edit";
                 const buttonDelete = document.createElement('input');
                 buttonDelete.type = "button";
                 buttonDelete.value = "Eliminar";
@@ -123,7 +127,6 @@ const getAll = async () => {
 const createNewList = () => {
     const buttonNewList = document.querySelector(".btn-create-list");
     const inputNewList = document.querySelector(".input-new-list");
-
     buttonNewList.addEventListener("click", async () => {
         if (inputNewList.value !== "") {
 
@@ -216,12 +219,6 @@ const eventsButtons = () => {
 
             } else {
                 if (inputCreateTask.value !== "") {
-                    console.log("Entré al if de editar la tarea");
-                    console.log(inputCreateTask.value);
-                    console.log(inputCreateTask.dataset.idTask);
-                    console.log(inputCreateTask.dataset.completed);
-                    console.log(e.target.dataset.id);
-
                     try {
                         let options = {
                             method: "PUT",
@@ -263,6 +260,9 @@ const eventsButtons = () => {
             buttonUpdateTask.value = "Actualizar";
         }
 
+        /**
+         * Función para eliminar una tarea
+         */
         if (e.target.className === "btn-delete-task") {
             let isDeleteTask = confirm("¿Estás seguro de eliminar la tarea?");
 
@@ -280,6 +280,30 @@ const eventsButtons = () => {
 
                 } catch (error) {}
             }
+        }
+
+        /**
+         * Evento para el manejo del check de la tarea completada
+         */
+        if (e.target.className === "check-completed") {
+
+            let idTdId = e.target.dataset.idTask + "-td-id";
+            const tdIdTask = document.getElementById(idTdId);
+            let idTdDescription = e.target.dataset.idTask + "-td-description";
+            const tdDescriptionTask = document.getElementById(idTdDescription);
+            let idTdButtonEdit = e.target.dataset.idTask + "-td-button-edit";
+            const tdButtonEdit = document.getElementById(idTdButtonEdit);
+
+            if (e.target.checked) {
+                tdIdTask.style = "text-decoration:line-through; color: red;";
+                tdDescriptionTask.style = "text-decoration:line-through; color: red;";
+                tdButtonEdit.disabled = true;
+            } else {
+                tdIdTask.style = "text-decoration:none;";
+                tdDescriptionTask.style = "text-decoration:none;";
+                tdButtonEdit.disabled = false;
+            }
+
         }
 
     })
