@@ -29,6 +29,8 @@ const getAll = async () => {
             botonCreateTask.type = "button";
             botonCreateTask.className = "btn-create-task";
             botonCreateTask.value = "Crear Tarea";
+            botonCreateTask.dataset.id = element.id;
+            inputCreateTask.id = element.id + "-" + botonCreateTask.className;
             containerListOfTasksHeader.appendChild(labelList);
             containerListOfTasksHeader.appendChild(inputDeleteList);
             containerListOfTasksHeader.appendChild(br1);
@@ -136,7 +138,7 @@ const createNewList = () => {
 
             }
         } else {
-            alert("Por favor ingrese el nombre de la nueva lista que desea crear");
+            alert("¡Por favor ingrese el nombre de la nueva lista que desea crear!");
         }
     });
 
@@ -149,7 +151,7 @@ const createNewList = () => {
 const eventsButtons = () => {
 
     document.addEventListener("click", async e => {
-        
+
         /**
          * Función para el evento de eliminar una lista
          */
@@ -168,10 +170,43 @@ const eventsButtons = () => {
                     location.reload();
                     let json = await res.json();
 
-                } catch (error) {
-                }
+                } catch (error) {}
             }
         }
+
+        /**
+         * Función para el evento de crear una nueva tarea
+         */
+        if (e.target.className === "btn-create-task") {
+            let idInputTask = e.target.dataset.id + "-" + e.target.className;
+            const inputCreateTask = document.getElementById(idInputTask);
+            if (inputCreateTask.value !== "") {
+                try {
+                    let options = {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json; charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            lista: {
+                                id: e.target.dataset.id
+                            },
+                            description: inputCreateTask.value
+                        })
+                    }
+                    let res = await fetch("http://localhost:8080/task", options);
+                    let json = await res.json();
+
+                    location.reload();
+                } catch (error) {
+
+                }
+            } else {
+                alert("¡Por favor ingrese la descripción de la tarea que desea crear!");
+            }
+        }
+
+
     })
 }
 
