@@ -1,3 +1,6 @@
+# Video explicando la ejecución y el código
+https://youtu.be/Wb68nMC3SXo
+
 # Frontend-Reto-Listas-Tareas
 Este repositorio tiene como finalidad presentar la parte del Frontend del Reto Técnico Full Stack, el cual consiste en hacer una lista de listas, usando Spring-Boot como Backend, MySQL como Base de Datos y JavaScript Vanilla como FrontEnd.
 
