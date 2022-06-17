@@ -14,6 +14,7 @@ const getAll = async () => {
             containerListOfTasksHeader.className = "list-of-tasks-header";
             const labelList = document.createElement('label');
             labelList.textContent = element.name.toUpperCase();
+            labelList.className = "name-list"
             const inputDeleteList = document.createElement('input');
             inputDeleteList.id = element.id;
             inputDeleteList.type = "button";
@@ -41,16 +42,21 @@ const getAll = async () => {
             fragment.appendChild(containerListOfTasksHeader);
 
             const tableTasks = document.createElement('table');
-            tableTasks.className = "table-tasks";
+            tableTasks.className = "table-tasks table";
             const thead = document.createElement('thead');
+            thead.className = "thead-dark";
             const trHead = document.createElement('tr');
             const thId = document.createElement('th');
+            thId.scope = "col";
             thId.textContent = "ID";
             const thTask = document.createElement('th');
+            thTask.scope = "col";
             thTask.textContent = "Tarea";
             const thCompletado = document.createElement('th');
+            thCompletado.scope = "col";
             thCompletado.textContent = "¿Completado?";
             const thAcciones = document.createElement('th');
+            thAcciones.scope = "col";
             thAcciones.textContent = "Acciones";
             trHead.appendChild(thId);
             trHead.appendChild(thTask);
@@ -64,9 +70,11 @@ const getAll = async () => {
             for (let i = 0; i < element.tasks.length; i++) {
                 const trBody = document.createElement('tr');
                 const tdId = document.createElement('td');
+                tdId.className = "id-task"
                 tdId.id = element.tasks[i].id + "-td-id";
                 tdId.textContent = element.tasks[i].id;
                 const tdDescription = document.createElement('td');
+                tdDescription.className = "description-task"
                 tdDescription.id = element.tasks[i].id + "-td-description";
                 tdDescription.textContent = element.tasks[i].description;
                 const tdCompleted = document.createElement('td');
@@ -107,6 +115,7 @@ const getAll = async () => {
             const br3 = document.createElement('br');
             const br4 = document.createElement('br');
             const hr1 = document.createElement('hr');
+            hr1.className = "line-horizontal";
 
             fragment.appendChild(br3);
             fragment.appendChild(br4);

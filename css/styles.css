@@ -1,0 +1,97 @@
+body{
+    background-image: radial-gradient(circle at 31.48% 37.03%, #b2f8ff 0, #3cb5f2 50%, #0076c3 100%);
+}
+
+.title{
+    font-family: Vegur, 'PT Sans', Verdana, sans-serif;
+    text-align: center;
+    border-top: 5px solid;
+    border-bottom: 5px solid;
+    padding: 10px;
+}
+
+.input-new-list{
+    width: 25%;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.btn-create-list{
+    background-color: #23AD0E;
+    color: aliceblue;
+    border-radius: 10px;
+    height: 40px;
+    width: 15%;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.line-horizontal {
+  height: 5px;
+  background-color: black;
+}
+
+.name-list{
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding: 0 20px;
+    color: #0A16A5;
+}
+
+.btn-delete-list{
+    background-color: red;
+    color: aliceblue;
+    border-radius: 10px;
+    height: 30px;
+    width: 10%;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.input-create-task{
+    width: 30%;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-create-task{
+    background-color: #23AD0E;
+    color: aliceblue;
+    border-radius: 10px;
+    height: 40px;
+    width: 12%;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.btn-edit-task{
+    width: 80px;
+    margin: 5px;
+    background-color: #083A90;
+    color: azure;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.btn-delete-task{
+    width: 80px;
+    margin: 5px;
+    background-color: red;
+    color: azure;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.id-task{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.description-task{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
